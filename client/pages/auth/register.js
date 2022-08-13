@@ -22,8 +22,8 @@ const theme = createTheme({
     }
 });
 
-export default function Login() {
-    const { login, user, error } = useContext(GlobalContext);
+export default function Register() {
+    const { register, user, error } = useContext(GlobalContext);
     console.log(user)
     useEffect(() => {
         if (user && user.name) {
@@ -41,7 +41,8 @@ export default function Login() {
         const data = new FormData(event.currentTarget);
         let email = data.get('email')
         let password = data.get('password')
-        login({ email, password });
+        let name = data.get('name')
+        register({ name, email, password })
     };
 
     return (
@@ -76,9 +77,19 @@ export default function Login() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Sign up
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Name"
+                                name="name"
+                                autoComplete="name"
+                                autoFocus
+                            />
                             <TextField
                                 margin="normal"
                                 required

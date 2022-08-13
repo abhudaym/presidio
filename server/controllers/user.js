@@ -16,6 +16,8 @@ const authUser = async (req, res, next) => {
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
+            enrolledQuiz: user.enrolledQuiz
+
         });
     } else {
         res.status(401);
@@ -47,6 +49,7 @@ const registerUser = async (req, res, next) => {
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
+            enrolledQuiz: user.enrolledQuiz
         });
     } else {
         res.status(400);
