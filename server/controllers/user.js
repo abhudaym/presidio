@@ -36,11 +36,9 @@ const registerUser = async (req, res, next) => {
         throw new Error("User already exists");
     }
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-    });
+
+    let user = new User({ name, email, password })
+    user = await user.save()
 
     if (user) {
         res.status(201).json({
@@ -56,5 +54,21 @@ const registerUser = async (req, res, next) => {
     }
 };
 
+// From a list a super user will make a user admin
+const makeUserAdmin = async (req, res, next) => {
+    console.log(req.params.id)
+    let user = await User.findById(req.params.id)
+    if (!user.isAdmin && user) {
+        user.isAdmin = true;
+        const updatedUser = await user.save();
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+        })
+    }
+}
 
-export { authUser, registerUser }
+
+export { authUser, registerUser, makeUserAdmin }

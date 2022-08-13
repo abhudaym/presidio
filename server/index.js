@@ -2,6 +2,7 @@ import express from 'express';
 import connectDB from './services/db.js';
 import dotenv from 'dotenv'
 import userRoutes from './routes/user.js';
+import quizRoutes from './routes/quiz.js';
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,7 @@ connectDB();
 
 app.use(express.json())
 app.use('/api/v1', userRoutes)
+app.use('/api/v1', quizRoutes)
 
 app.listen("5000", (req, res) => {
     console.log("Server is running")

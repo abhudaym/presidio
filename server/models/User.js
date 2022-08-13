@@ -19,7 +19,23 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
-    }
+    },
+    enrolledQuiz: [
+        {
+            quizId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Quiz"
+            },
+            isComplete: {
+                type: Boolean,
+                default: false
+            },
+            score: {
+                type: Number,
+                default: 0
+            }
+        },
+    ]
 })
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
