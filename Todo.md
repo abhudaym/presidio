@@ -1,0 +1,2 @@
+- Perform checks if a user is already enrolled in the given quiz
+- Create collection in postman for API calls

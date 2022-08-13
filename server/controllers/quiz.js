@@ -10,10 +10,7 @@ const createQuiz = async (req, res, next) => {
 
 const enroll = async (req, res, next) => {
     try {
-        // Add course in user's enrolled courses
-        // Add user in course's enrolled users
-        console.log(req.body);
-        let user = req.body.user;
+        let user = req.user;
         let quiz = await Quiz.findById(req.params.id);
         user = await User.findById(user);
         let obj2 = {
