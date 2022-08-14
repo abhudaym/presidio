@@ -50,44 +50,39 @@ export default function Home() {
     <Layout>
       <RootStyle>
         <Grid container>
-          <Grid item lg={4} md={6}>
-            <Stack sx={{ marginBottom: "25px" }}>
-              {quiz && quiz.map((item) => {
-                return (
-                  <Card
-                    sx={{ margin: "0 40px", boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)" }}
-                  >
+          {quiz && quiz.map((item) => {
+            return (
+              <Grid item lg={4} md={6}>
+                <Card
+                  sx={{ margin: "0 40px", boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)" }}
+                >
 
-                    <Container sx={{ paddingTop: "20px", paddingBottom: "20px", margin: '10px' }}>
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          fontFamily: "Poppins !important",
-                          marginBottom: "10px",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Stack direction="column">
-                        <Typography variant='p'>{item.description}</Typography>
-                        <Typography variant='p'>Total Questions: {item.questions.length}</Typography>
-                        <Stack direction='row' sx={{ alignItems: 'center', mt: '30px', justifyContent: 'space-evenly' }}>
-                          <Button variant='contained' sx={{ width: '40%' }} onClick={() => handleOnClick(item._id)}>Take quiz</Button>
-                          <Typography variant='p'>
-                            Total Users: {item.enrolledUsers.length}
-                          </Typography>
-                        </Stack>
+                  <Container sx={{ paddingTop: "20px", paddingBottom: "20px", margin: '10px' }}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontFamily: "Poppins !important",
+                        marginBottom: "10px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Stack direction="column">
+                      <Typography variant='p'>{item.description}</Typography>
+                      <Typography variant='p'>Total Questions: {item.questions.length}</Typography>
+                      <Stack direction='row' sx={{ alignItems: 'center', mt: '30px', justifyContent: 'space-evenly' }}>
+                        <Button variant='contained' sx={{ width: '40%' }} onClick={() => handleOnClick(item._id)}>Take quiz</Button>
+                        <Typography variant='p'>
+                          Total Users: {item.enrolledUsers.length}
+                        </Typography>
                       </Stack>
-                    </Container>
-                  </Card>
-                )
-              })}
-
-            </Stack>
-          </Grid>
-          <Grid item lg={4} md={6}></Grid>
-          <Grid item lg={4} md={6}></Grid>
+                    </Stack>
+                  </Container>
+                </Card>
+              </Grid>
+            )
+          })}
         </Grid>
       </RootStyle>
     </Layout>
