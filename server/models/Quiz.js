@@ -19,6 +19,13 @@ const questionSchema = mongoose.Schema({
 
 const QuizSchema = mongoose.Schema(
     {
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+        },
         questions: [questionSchema],
         enrolledUsers: [
             {
@@ -26,7 +33,7 @@ const QuizSchema = mongoose.Schema(
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
-                isCompleted: {
+                isComplete: {
                     type: Boolean,
                     required: true,
                     default: false

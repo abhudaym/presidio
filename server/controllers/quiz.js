@@ -26,7 +26,6 @@ const enroll = async (req, res, next) => {
         user.enrolledQuiz.push(obj1);
         quiz = await quiz.save();
         user = await user.save();
-        console.log(user, quiz);
         return res.status(201).json({ quiz: quiz, user: user });
     } catch (error) {
         console.log(error);
@@ -34,4 +33,54 @@ const enroll = async (req, res, next) => {
 
 }
 
-export { enroll, createQuiz }
+
+const getAllQuiz = async (req, res, next) => {
+    const quiz = await Quiz.find()
+    console.log(quiz)
+    res.json(quiz)
+}
+
+const getUserEnrolledQuiz = async (req, res, next) => {
+    const user = req.user;
+    res.json(user.enrolledQuiz)
+}
+
+const getQuizDetails = async (req, res, next) => {
+    let quiz = req.params.id
+    quiz = await Quiz.findById(quiz)
+
+    res.json(quiz);
+}
+
+const updateScore = async (req, res) => {
+    let quiz = req.params.id
+    let user = req.user
+    const { score } = req.body
+
+    quiz = await Quiz.findById(quiz)
+    user = await User.findById(user)
+    quiz.enrolledUsers.map((x) => {
+        if (toString(x.userId) == toString(user._id)) {
+            x.isComplete = true;
+            x.score = score
+        }
+    })
+
+    user.enrolledQuiz.map((x) => {
+        console.log(toString(x.quizId) === toString(quiz._id))
+        if (toString(x.quizId) === toString(quiz._id)) {
+            console.log('second')
+            x.isComplete = true
+            x.score = score
+        }
+    })
+    quiz = await quiz.save();
+    user = await user.save();
+
+
+    res.json({ user, quiz });
+}
+
+
+
+export { enroll, createQuiz, getAllQuiz, getUserEnrolledQuiz, getQuizDetails, updateScore }

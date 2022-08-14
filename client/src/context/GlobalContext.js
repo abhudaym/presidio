@@ -1,26 +1,29 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import Reducers from "./Reducers";
+
+
+
 let userInfoFromStorage
+let initialState
 if (typeof window !== 'undefined') {
-    // Perform localStorage action
     userInfoFromStorage = localStorage.getItem("userInfo")
         ? JSON.parse(localStorage.getItem("userInfo"))
         : null;
     console.log(userInfoFromStorage);
+
+    initialState = {
+        user: userInfoFromStorage,
+        error: null,
+        loading: true
+    }
 }
 
-
-
-const initialState = {
-    user: userInfoFromStorage,
-    error: null,
-    loading: true
-}
 
 export const GlobalContext = createContext(initialState)
 
 export const GlobalContextProvider = ({ children }) => {
+
     const [state, dispatch] = useReducer(Reducers, initialState);
     const login = async ({ email, password }) => {
         try {
@@ -71,9 +74,9 @@ export const GlobalContextProvider = ({ children }) => {
     return (
         <GlobalContext.Provider
             value={{
-                user: state.user,
-                error: state.error,
-                loading: state.loading,
+                user: state && state.user,
+                error: state && state.error,
+                loading: state && state.loading,
                 login,
                 logout,
                 register

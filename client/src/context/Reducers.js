@@ -19,7 +19,7 @@ export default (state, action) => {
             return {
                 ...state,
                 error: action.payload
-            }
+            };
         case "LOGOUT":
             return {};
         default:
