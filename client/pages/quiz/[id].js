@@ -8,7 +8,6 @@ import { GlobalContext } from "../../src/context/GlobalContext";
 
 const Quiz = () => {
     const { user } = useContext(GlobalContext);
-    console.log(user)
     const router = useRouter();
     const [data, setData] = useState();
     const [id, setId] = useState()

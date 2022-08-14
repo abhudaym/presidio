@@ -31,7 +31,7 @@ export default function Home() {
       }
       fetchData()
     }
-  }, [])
+  }, [user])
 
   const config = {
     headers: {
@@ -41,7 +41,6 @@ export default function Home() {
   };
   const handleOnClick = async (id) => {
     const res = await axios.get(`http://localhost:5000/api/v1/enroll/${id}`, config)
-    console.log(res)
     Router.push(`/quiz/${id}`)
 
   }

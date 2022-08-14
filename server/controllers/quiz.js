@@ -81,6 +81,17 @@ const updateScore = async (req, res) => {
     res.json({ user, quiz });
 }
 
+// get sorted scores of a quiz
+const getScore = async (req, res, next) => {
+    const arr = []
+    let quiz = await Quiz.findById(req.params.id)
+    quiz.enrolledUsers.map((item) => {
+        arr.push(item)
+    })
+
+    res.json(arr)
+}
 
 
-export { enroll, createQuiz, getAllQuiz, getUserEnrolledQuiz, getQuizDetails, updateScore }
+
+export { enroll, createQuiz, getAllQuiz, getUserEnrolledQuiz, getQuizDetails, updateScore, getScore }

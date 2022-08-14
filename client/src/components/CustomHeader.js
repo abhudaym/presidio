@@ -11,15 +11,13 @@ import { styled } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { GlobalContext } from "../context/GlobalContext";
 import { useTheme } from "@mui/material/styles";
+import Link from 'next/link'
 
-const logoutHandler = async () => {
-    await logout();
-};
 
 
 const CustomHeader = () => {
     const { user, logout, error } = useContext(GlobalContext);
-
+    console.log(user)
     const logoutHandler = async () => {
         await logout();
     };
@@ -41,6 +39,12 @@ const CustomHeader = () => {
                 <Typography variant='h4' sx={{ color: 'black' }}>Quizer</Typography>
                 {user && (
                     <Stack direction="row" sx={{ alignItems: "center" }}>
+
+                        {user.isAdmin && (
+                            <a href='/admin/quiz'>
+                                <Typography sx={{ color: 'black', marginRight: '70px' }}>Admin</Typography>
+                            </a>
+                        )}
 
                         <Typography
                             variant="p"
